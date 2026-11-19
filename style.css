@@ -22,3 +22,15 @@
 .gift-icon svg{display:block;max-width:100%;height:auto}
 /* Оптическое выравнивание подписи относительно логотипа. */
 .logo-caption{position:relative;top:3px}
+.project-preview{display:block}
+.project-content{width:100%}
+.project-content>.project-category{display:block}
+@media(min-width:801px){
+  /* Общая строка сетки совмещает край фото с разделителем ссылки. */
+  .project-card:last-child:nth-child(odd){grid-template-rows:auto auto}
+  .project-card:last-child:nth-child(odd) .project-body{display:contents}
+  .project-card:last-child:nth-child(odd) .project-preview{grid-column:1;grid-row:1;aspect-ratio:auto;min-height:0}
+  .project-card:last-child:nth-child(odd) .project-preview.has-screenshot>img{object-fit:cover}
+  .project-card:last-child:nth-child(odd) .project-content{grid-column:2;grid-row:1;padding:28px 29px 0}
+  .project-card:last-child:nth-child(odd) .project-link{grid-column:2;grid-row:2;width:auto;margin:0 29px 29px}
+}

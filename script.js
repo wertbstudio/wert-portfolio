@@ -14,7 +14,14 @@
     catch { return null; }
   };
   function createPreview(project) {
-    const preview = element('div', 'project-preview');
+    const href = safeURL(project.url);
+    const preview = element(href ? 'a' : 'div', 'project-preview');
+    if (href) {
+      preview.href = href;
+      preview.target = '_blank';
+      preview.rel = 'noopener noreferrer';
+      preview.setAttribute('aria-label', `Открыть сайт ${project.title} (в новой вкладке)`);
+    }
     preview.style.setProperty('--project-accent', /^#[0-9a-f]{6}$/i.test(project.accent) ? project.accent : '#6366f1');
     const fallback = element('div', 'preview-fallback');
     fallback.setAttribute('aria-hidden', 'true');
@@ -46,13 +53,15 @@
     for (const project of filtered) {
       const card = element('article', 'project-card');
       const body = element('div', 'project-body');
-      body.append(element('span', 'project-category', project.category));
+      const content = element('div', 'project-content');
+      content.append(element('span', 'project-category', project.category));
       const titleRow = element('div', 'project-title-row');
       titleRow.append(element('h3', '', project.title), element('span', 'project-number', String(projects.indexOf(project) + 1).padStart(2, '0')));
-      body.append(titleRow, element('p', 'project-subtitle', project.subtitle), element('p', 'project-description', project.description), element('p', 'project-benefit', project.benefit));
+      content.append(titleRow, element('p', 'project-subtitle', project.subtitle), element('p', 'project-description', project.description), element('p', 'project-benefit', project.benefit));
       const tags = element('div', 'tags');
       (project.tags || []).forEach(tag => tags.append(element('span', 'tag', tag)));
-      body.append(tags);
+      content.append(tags);
+      body.append(content);
       const href = safeURL(project.url);
       if (href) {
         const link = element('a', 'project-link', 'Открыть живой сайт');
