@@ -16,6 +16,7 @@
   function createPreview(project) {
     const href = safeURL(project.url);
     const preview = element(href ? 'a' : 'div', 'project-preview');
+    preview.dataset.project = project.id;
     if (href) {
       preview.href = href;
       preview.target = '_blank';

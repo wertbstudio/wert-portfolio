@@ -23,6 +23,7 @@
 /* Оптическое выравнивание подписи относительно логотипа. */
 .logo-caption{position:relative;top:3px}
 .project-preview{display:block}
+.project-preview.has-screenshot[data-project="dentapro"]>img{object-fit:cover;object-position:top}
 .project-content{width:100%}
 .project-content>.project-category{display:block}
 @media(min-width:801px){
